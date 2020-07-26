@@ -13,7 +13,7 @@ import {
 import CustomModal from "../components/CustomModal";
 import NewsCard from "../components/NewsCard";
 import SafeViewAndroid from "../components/SafeViewAndroid";
-import { API_KEY } from "react-native-dotenv";
+import ENV from "../env";
 
 const H_MAX_HEIGHT = 90;
 const H_MIN_HEIGHT = 55;
@@ -47,7 +47,7 @@ const MainScreen = ({ props, navigation }) => {
 
   useEffect(() => {
     fetch(
-      `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&language=en&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&language=en&apiKey=${ENV.newsApiKey}`
     )
       .then((response) => response.json())
       .then((json) => setData(json.articles))
@@ -58,7 +58,7 @@ const MainScreen = ({ props, navigation }) => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     fetch(
-      `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&language=en&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&language=en&apiKey=${ENV.newsApiKey}`
     )
       .then((response) => response.json())
       .then((json) => setData(json.articles))
